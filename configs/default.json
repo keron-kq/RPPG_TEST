@@ -1,0 +1,31 @@
+{
+  "components": {
+    "source": "dummy",
+    "face_tracker": "simple",
+    "signal_extractor": "green_channel",
+    "estimator": "rolling_average",
+    "sink": "console"
+  },
+  "pipeline": {
+    "max_frames": 120,
+    "skip_failed_tracking": true
+  },
+  "source_params": {
+    "fps": 30,
+    "total_frames": 180
+  },
+  "face_tracker_params": {
+    "enable_tracking": true
+  },
+  "signal_extractor_params": {
+    "field_name": "green"
+  },
+  "estimator_params": {
+    "window_size": 120,
+    "min_samples": 20
+  },
+  "sink_params": {
+    "prefix": "[demo]"
+  }
+}
+
