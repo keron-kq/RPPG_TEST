@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from .components.estimation import RollingAverageEstimator
+from .components.estimation import FFTHeartRateEstimator, RollingAverageEstimator
 from .components.face import SimpleFaceTracker
 from .components.signal import GreenChannelSignalExtractor
 from .components.sinks import ConsoleSink
@@ -25,6 +25,7 @@ class ComponentFactory:
         }
         self._estimator_builders: dict[str, Builder] = {
             "rolling_average": RollingAverageEstimator,
+            "fft_hr": FFTHeartRateEstimator,
         }
         self._sink_builders: dict[str, Builder] = {
             "console": ConsoleSink,

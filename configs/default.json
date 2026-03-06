@@ -3,7 +3,7 @@
     "source": "dummy",
     "face_tracker": "simple",
     "signal_extractor": "green_channel",
-    "estimator": "rolling_average",
+    "estimator": "fft_hr",
     "sink": "console"
   },
   "pipeline": {
@@ -21,8 +21,12 @@
     "field_name": "green"
   },
   "estimator_params": {
-    "window_size": 120,
-    "min_samples": 20
+    "fps": 30.0,
+    "window_size": 180,
+    "min_samples": 90,
+    "hr_low_hz": 0.8,
+    "hr_high_hz": 3.0,
+    "smoothing_alpha": 0.9
   },
   "sink_params": {
     "prefix": "[demo]"

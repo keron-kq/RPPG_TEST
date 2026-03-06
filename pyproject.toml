@@ -11,7 +11,9 @@ requires-python = ">=3.10"
 authors = [
   { name = "Workspace Developer" }
 ]
-dependencies = []
+dependencies = [
+  "numpy"
+]
 
 [project.scripts]
 rppg = "rppg_framework.cli:main"

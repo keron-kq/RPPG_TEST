@@ -11,7 +11,7 @@ class ComponentsConfig:
     source: str = "dummy"
     face_tracker: str = "simple"
     signal_extractor: str = "green_channel"
-    estimator: str = "rolling_average"
+    estimator: str = "fft_hr"
     sink: str = "console"
 
 
@@ -28,7 +28,16 @@ class AppConfig:
     source_params: dict[str, Any] = field(default_factory=lambda: {"fps": 30, "total_frames": 300})
     face_tracker_params: dict[str, Any] = field(default_factory=dict)
     signal_extractor_params: dict[str, Any] = field(default_factory=dict)
-    estimator_params: dict[str, Any] = field(default_factory=lambda: {"window_size": 150, "min_samples": 30})
+    estimator_params: dict[str, Any] = field(
+        default_factory=lambda: {
+            "fps": 30.0,
+            "window_size": 300,
+            "min_samples": 150,
+            "hr_low_hz": 0.8,
+            "hr_high_hz": 3.0,
+            "smoothing_alpha": 0.9,
+        }
+    )
     sink_params: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
@@ -46,7 +55,17 @@ class AppConfig:
             source_params=raw.get("source_params", {"fps": 30, "total_frames": 300}),
             face_tracker_params=raw.get("face_tracker_params", {}),
             signal_extractor_params=raw.get("signal_extractor_params", {}),
-            estimator_params=raw.get("estimator_params", {"window_size": 150, "min_samples": 30}),
+            estimator_params=raw.get(
+                "estimator_params",
+                {
+                    "fps": 30.0,
+                    "window_size": 300,
+                    "min_samples": 150,
+                    "hr_low_hz": 0.8,
+                    "hr_high_hz": 3.0,
+                    "smoothing_alpha": 0.9,
+                },
+            ),
             sink_params=raw.get("sink_params", {}),
         )
 

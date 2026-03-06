@@ -46,13 +46,13 @@ rppg --config configs/default.json
 
 ## 当前默认实现说明
 
-默认组件是“可运行占位实现”：
+默认组件包含一个可直接用于频域心率估计的基础实现：
 
 - `DummyFrameSource`：生成模拟帧；
 - `SimpleFaceTracker`：模拟 ROI 追踪；
 - `GreenChannelSignalExtractor`：提取绿色通道值；
-- `RollingAverageEstimator`：基于窗口的占位估计；
+- `FFTHeartRateEstimator`：基于去趋势 + FFT + 频带主峰的心率估计；
 - `ConsoleSink`：控制台输出。
 
-它们用于验证工程链路和扩展点，不代表最终算法效果。
+当前实现可用于基础链路验证和初步调参，后续可替换为更完整的滤波、峰值置信度融合与呼吸频率估计逻辑。
 
